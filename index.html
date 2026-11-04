@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Adrián Muñoz Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one narrow left-aligned column floating on a slow starfield. Quiet type, every project opens to its live preview and code. */
+:root{
+  color-scheme:dark;
+  --bg:#000000; --panel:#0B0B0D; --line:#1F1F23; --fg:#F2F2F2; --muted:#A8A8A8; --faint:#5E5E66; --accent:#9FB4FF;
+  --k:#9FB4FF; --s:#E8C88F; --c:#5E5E66;
+  --f-sans:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+*{box-sizing:border-box}
+html,body{background:var(--bg)}
+body{color:var(--fg);font:16px/1.65 var(--f-sans);-webkit-font-smoothing:antialiased}
+#sky{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+main{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px));padding-block:22vh 64px}
+h1,h2,h3,p{margin:0}
+h1{font-size:clamp(44px,9vw,64px);font-weight:500;letter-spacing:-.035em;line-height:1.05}
+a{color:var(--fg);text-decoration:none}
+a:hover{color:var(--accent)}
+:focus-visible{outline:1px solid var(--accent);outline-offset:4px;border-radius:2px}
+.mono{font-family:var(--f-mono)}
+.lede{color:var(--muted);margin-top:18px;max-width:44ch}
+.rule{width:32px;height:1px;background:var(--faint);margin:26px 0}
+.links{display:flex;gap:10px;align-items:center;font:14px var(--f-mono)}
+.links span{color:var(--faint)}
+.domain{font:12px var(--f-mono);color:var(--faint);margin-top:22px}
+.status{display:inline-flex;align-items:center;gap:8px;font:12px var(--f-mono);color:var(--muted);margin-bottom:22px}
+header{text-align:center}
+.role{font:13px var(--f-mono);color:var(--accent);letter-spacing:.04em;margin-top:12px}
+header .lede{margin-left:auto;margin-right:auto}
+header .rule{margin-left:auto;margin-right:auto}
+header .links{justify-content:center}
+.status i{width:6px;height:6px;border-radius:50%;background:#7EE0A6;box-shadow:0 0 10px #7EE0A6}
+
+section{margin-top:120px}
+.label{font:12px var(--f-mono);color:var(--faint);letter-spacing:.04em;margin-bottom:22px}
+
+/* project rows */
+.project{border-top:1px solid var(--line)}
+.project:last-child{border-bottom:1px solid var(--line)}
+.row{all:unset;box-sizing:border-box;display:grid;grid-template-columns:1fr auto;gap:4px 16px;width:100%;padding:20px 0;cursor:pointer}
+.row h3{font-size:18px;font-weight:500;letter-spacing:-.01em}
+.row p{grid-column:1/-1;color:var(--muted);font-size:15px}
+.row .meta{font:12px var(--f-mono);color:var(--faint);align-self:center}
+.row:hover h3{color:var(--accent)}
+.row .plus{display:inline-block;transition:transform .25s}
+.project.open .plus{transform:rotate(45deg)}
+.live .row h3::after{content:"live";font:11px var(--f-mono);color:#7EE0A6;border:1px solid #2A4A38;border-radius:999px;padding:2px 8px;margin-left:12px;vertical-align:3px}
+.live .row .arrow{display:inline-block;transition:transform .25s}
+.live .row:hover .arrow{transform:translate(2px,-2px)}
+.body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease}
+.project.open .body{grid-template-rows:1fr}
+.body > div{overflow:hidden;min-width:0}
+.panel{border:1px solid var(--line);border-radius:10px;background:var(--panel);overflow:hidden;margin-bottom:22px}
+.tabs{display:flex;gap:18px;padding:10px 14px;border-bottom:1px solid var(--line);font:12px var(--f-mono)}
+.tabs button{all:unset;cursor:pointer;color:var(--faint)}
+.tabs button[aria-selected="true"]{color:var(--fg)}
+.tabs .tags{margin-left:auto;color:var(--faint)}
+.stage{height:280px;display:grid;place-items:center;padding:20px}
+pre{margin:0;height:280px;overflow:auto;padding:16px 18px;font:12.5px/1.7 var(--f-mono);color:#D6D6DA}
+.k{color:var(--k)}.s{color:var(--s)}.c{color:var(--c)}
+.example{font:11px var(--f-mono);color:var(--faint);padding:0 14px 12px}
+
+/* skills panel */
+.skills{display:grid;grid-template-columns:1fr 1fr;gap:28px;padding:22px 24px}
+.skills h4{margin:0 0 12px;font:500 12px var(--f-mono);color:var(--fg);letter-spacing:.04em}
+.skills h4 span{color:var(--faint);font-weight:400}
+.skills ul{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:15px;color:var(--muted)}
+.skills li::before{content:"→ ";color:var(--accent);font-family:var(--f-mono)}
+@media (max-width:560px){.skills{grid-template-columns:1fr;gap:22px}}
+
+/* mini previews */
+/* education panel */
+.edu{display:grid;grid-template-columns:1.4fr 1fr;gap:32px;padding:28px;background:radial-gradient(120% 140% at 0% 0%,#151B33 0%,var(--panel) 55%)}
+.edu-kicker{font:11px var(--f-mono);color:#7EE0A6;letter-spacing:.08em;text-transform:uppercase}
+.edu h4{margin:10px 0 0;font:500 clamp(24px,3.2vw,32px)/1.12 var(--f-sans);letter-spacing:-.02em;background:linear-gradient(90deg,#F2F2F2,var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+.edu-school{margin-top:10px;font:13px var(--f-mono);color:var(--fg)}
+.edu-pitch{margin-top:16px;color:var(--muted);font-size:15px;max-width:46ch}
+.edu-side{display:flex;flex-direction:column;justify-content:space-between;gap:22px}
+.edu-grad{border:1px solid var(--line);border-radius:10px;padding:16px 18px;background:rgba(159,180,255,.04)}
+.edu-grad span{font:11px var(--f-mono);color:var(--faint);letter-spacing:.04em}
+.edu-grad b{display:block;font:500 48px/1 var(--f-sans);letter-spacing:-.04em;margin-top:8px;color:var(--fg)}
+.edu-tags{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.edu-tags li{font:12px var(--f-mono);color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:5px 11px}
+@media (max-width:560px){.edu{grid-template-columns:1fr;padding:22px}}
+/* booking */
+.book .row h3::after{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:#7EE0A6;margin-left:12px;vertical-align:4px;animation:ping 1.8s ease-out infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(126,224,166,.6)}100%{box-shadow:0 0 0 10px rgba(126,224,166,0)}}
+.booker{padding:24px;display:grid;gap:22px;background:radial-gradient(120% 120% at 100% 0%,#14241C 0%,var(--panel) 50%)}
+.step-label{font:12px var(--f-mono);color:var(--muted);margin-bottom:10px;letter-spacing:.03em}
+.step-label b{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;border:1px solid var(--faint);font-weight:500;font-size:11px;margin-right:8px;color:var(--fg);transition:all .2s}
+.step.done .step-label b{background:#7EE0A6;border-color:#7EE0A6;color:#000}
+.step .tz{color:var(--faint)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{all:unset;box-sizing:border-box;cursor:pointer;font:14px var(--f-sans);color:var(--fg);border:1px solid var(--line);border-radius:999px;padding:8px 14px;background:rgba(255,255,255,.02);transition:transform .15s,border-color .2s,background .2s}
+.chip small{font:11px var(--f-mono);color:var(--faint);margin-left:6px}
+.chip:hover{border-color:var(--faint);transform:translateY(-1px)}
+.chip[aria-pressed="true"]{border-color:var(--accent);background:rgba(159,180,255,.14);box-shadow:0 0 18px rgba(159,180,255,.18)}
+.chip[aria-pressed="true"] small{color:var(--accent)}
+.days .chip{text-align:center;line-height:1.25;padding:8px 14px;border-radius:12px}
+.days .chip small{display:block;margin:2px 0 0}
+.confirm{display:grid;gap:12px;border-top:1px solid var(--line);padding-top:20px}
+.meter{height:3px;background:var(--line);border-radius:3px;overflow:hidden}
+.meter i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),#7EE0A6);transition:width .35s ease}
+#bookSummary{color:var(--muted);font-size:15px}
+#bookSummary strong{color:var(--fg);font-weight:500}
+.book-btn{justify-self:start;display:inline-flex;gap:10px;align-items:center;font:500 15px var(--f-sans);color:#000;background:#7EE0A6;border-radius:999px;padding:12px 22px;transition:all .25s}
+.book-btn span{transition:transform .2s}
+.book-btn:hover{color:#000;box-shadow:0 0 28px rgba(126,224,166,.45)}
+.book-btn:hover span{transform:translateX(4px)}
+.book-btn[aria-disabled="true"]{background:var(--line);color:var(--faint);pointer-events:none}
+.book-btn.ready{animation:glow 2s ease-in-out infinite}
+@keyframes glow{50%{box-shadow:0 0 26px rgba(126,224,166,.5)}}
+
+/* stack */
+.stack{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;font-size:15px}
+.stack h3{font:12px var(--f-mono);color:var(--muted);margin-bottom:10px}
+.stack ul{list-style:none;padding:0;margin:0;display:grid;gap:4px}
+
+/* contact */
+.contact p{color:var(--muted);max-width:44ch}
+.mail{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:18px;font:15px var(--f-mono)}
+.mail code{user-select:all;word-break:break-all}
+.mail button{all:unset;cursor:pointer;font:12px var(--f-mono);color:var(--faint);border:1px solid var(--line);border-radius:6px;padding:6px 10px}
+.mail button:hover{color:var(--fg);border-color:var(--faint)}
+footer{margin-top:120px;font:12px var(--f-mono);color:var(--faint);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+@media (max-width:560px){
+  main{padding-block:14vh 48px}
+  .stack{grid-template-columns:1fr 1fr}
+  .row .meta{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<canvas id="sky" aria-hidden="true"></canvas>
+
+<main>
+  <header>
+    <div class="status"><i></i>open for freelance work</div>
+    <h1>Adrián Muñoz</h1>
+    <p class="lede">I design and build fast, clean websites, and I show the code behind every one.</p>
+    <p class="role">front-end developer</p>
+    <div class="rule"></div>
+    <div class="links"><a href="#work">work</a><span>·</span><a href="#stack">stack</a><span>·</span><a href="#contact">mail</a><span>·</span><a href="https://lahn.es" target="_blank" rel="noopener">lahn.es ↗</a></div>
+    <p class="domain">barcelona</p>
+  </header>
+
+  <section id="work">
+    <p class="label">selected work · tap to open</p>
+
+    <article class="project live">
+      <a class="row" href="https://lahn.es" target="_blank" rel="noopener">
+        <h3>lahn.es</h3><span class="meta">visit site <span class="arrow">↗</span></span>
+        <p>A real website I designed and built from scratch, live in production.</p>
+      </a>
+    </article>
+
+    <article class="project open">
+      <button class="row" type="button" aria-expanded="true">
+        <h3>Skills</h3><span class="meta">front-end · back end <span class="plus">+</span></span>
+        <p>Everything a front end needs, from layout to launch, plus the back end know how to handle the server side when a project calls for it.</p>
+      </button>
+      <div class="body"><div>
+        <div class="panel skills">
+          <div>
+            <h4>front-end <span>· core</span></h4>
+            <ul>
+              <li>Semantic HTML &amp; modern CSS</li>
+              <li>JavaScript (ES6+)</li>
+              <li>Responsive, mobile-first layouts</li>
+              <li>Accessibility &amp; performance</li>
+              <li>UI design in Figma</li>
+              <li>SEO basics &amp; deployment</li>
+            </ul>
+          </div>
+          <div>
+            <h4>back end <span>· when needed</span></h4>
+            <ul>
+              <li>APIs: building &amp; connecting</li>
+              <li>Databases &amp; data storage</li>
+              <li>Forms, auth &amp; user accounts</li>
+              <li>Servers, hosting &amp; domains</li>
+            </ul>
+          </div>
+        </div>
+      </div></div>
+    </article>
+
+    <article class="project">
+      <button class="row" type="button" aria-expanded="false">
+        <h3>Education</h3><span class="meta">ai · data <span class="plus">+</span></span>
+        <p>Studying Artificial Intelligence and Data Analysis at La Salle Campus Barcelona, so the sites I build are ready for what comes next.</p>
+      </button>
+      <div class="body"><div>
+        <div class="panel edu">
+          <div class="edu-main">
+            <p class="edu-kicker">currently studying</p>
+            <h4>Artificial Intelligence<br>&amp; Data Analysis</h4>
+            <p class="edu-school">La Salle Campus Barcelona</p>
+            <p class="edu-pitch">Design and code on one side, data and AI on the other. I'm building the skills to make websites that don't just look good, but think, learn and measure what works.</p>
+          </div>
+          <div class="edu-side">
+            <div class="edu-grad"><span>expected graduation</span><b>2028</b></div>
+            <ul class="edu-tags">
+              <li>Machine learning</li><li>Python</li><li>Data visualisation</li><li>Statistics</li><li>Databases</li>
+            </ul>
+          </div>
+        </div>
+      </div></div>
+    </article>
+
+    <article class="project book">
+      <button class="row" type="button" aria-expanded="false">
+        <h3>Book a meeting</h3><span class="meta">free · no commitment <span class="plus">+</span></span>
+        <p>Got an idea for a website? Pick a time that suits you and let's talk it through. It takes 20 seconds.</p>
+      </button>
+      <div class="body"><div>
+        <div class="panel booker">
+          <div class="step">
+            <p class="step-label"><b>1</b> what do you need?</p>
+            <div class="chips" data-group="type">
+              <button type="button" class="chip" data-val="Quick intro" data-len="15 min">👋 Quick intro <small>15 min</small></button>
+              <button type="button" class="chip" data-val="Project chat" data-len="30 min">💡 Project chat <small>30 min</small></button>
+              <button type="button" class="chip" data-val="Website review" data-len="30 min">🔍 Website review <small>30 min</small></button>
+            </div>
+          </div>
+          <div class="step">
+            <p class="step-label"><b>2</b> how should we meet?</p>
+            <div class="chips" data-group="via">
+              <button type="button" class="chip" data-val="Google Meet">🎥 Google Meet</button>
+              <button type="button" class="chip" data-val="Phone call">📞 Phone call</button>
+              <button type="button" class="chip" data-val="Coffee in Barcelona">☕ Coffee in Barcelona</button>
+            </div>
+          </div>
+          <div class="step">
+            <p class="step-label"><b>3</b> pick a day</p>
+            <div class="chips days" data-group="day" id="dayChips"></div>
+          </div>
+          <div class="step">
+            <p class="step-label"><b>4</b> pick a time <span class="tz">(Barcelona time)</span></p>
+            <div class="chips" data-group="time">
+              <button type="button" class="chip" data-val="10:00">10:00</button>
+              <button type="button" class="chip" data-val="12:00">12:00</button>
+              <button type="button" class="chip" data-val="16:00">16:00</button>
+              <button type="button" class="chip" data-val="18:00">18:00</button>
+            </div>
+          </div>
+          <div class="confirm">
+            <div class="meter" aria-hidden="true"><i id="bookMeter"></i></div>
+            <p id="bookSummary" aria-live="polite">Pick an option in each step to build your meeting.</p>
+            <a id="bookBtn" class="book-btn" aria-disabled="true" href="#">Request this meeting <span>→</span></a>
+          </div>
+        </div>
+      </div></div>
+    </article>
+  </section>
+
+  <section id="stack">
+    <p class="label">stack</p>
+    <div class="stack">
+      <div><h3>build</h3><ul><li>HTML &amp; CSS</li><li>JavaScript</li><li>Responsive layout</li><li>Accessibility</li></ul></div>
+      <div><h3>design</h3><ul><li>Figma</li><li>Type &amp; color</li><li>Wireframes</li><li>UI systems</li></ul></div>
+      <div><h3>ship</h3><ul><li>Git &amp; GitHub</li><li>Netlify · Vercel</li><li>Performance</li><li>Basic SEO</li></ul></div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <p class="label">contact</p>
+    <p>Need a website for your business or project? Send a short note and I'll reply within two working days.</p>
+    <div class="mail"><code id="mailAddr">adrianmunozaguilera88@gmail.com</code><button id="copyMail" type="button">copy</button></div>
+  </section>
+
+  <footer><span>© 2026 adrián muñoz aguilera</span><span>hand-coded · no templates</span></footer>
+</main>
+
+<script>
+// Starfield: slow drift + twinkle, static when reduced motion is on
+(() => {
+  const cv = document.getElementById('sky'), ctx = cv.getContext('2d');
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let stars = [], w, h, dpr;
+  function size(){
+    dpr = Math.min(devicePixelRatio || 1, 2);
+    w = cv.width = innerWidth * dpr; h = cv.height = innerHeight * dpr;
+    const n = Math.round(innerWidth * innerHeight / 3800);
+    stars = Array.from({length:n}, () => {
+      const big = Math.random() < .08;
+      return {x:Math.random()*w, y:Math.random()*h, r:(big ? Math.random()*1+1.6 : Math.random()*.9+.7)*dpr, a:big ? Math.random()*.2+.8 : Math.random()*.5+.35, g:big, t:Math.random()*6.28, v:(Math.random()*.08+.02)*dpr};
+    });
+  }
+  function draw(time){
+    ctx.clearRect(0,0,w,h);
+    for (const s of stars){
+      if (!still){ s.y -= s.v; if (s.y < 0){ s.y = h; s.x = Math.random()*w; } }
+      const tw = still ? s.a : s.a * (.6 + .4*Math.sin(time/900 + s.t));
+      ctx.fillStyle = `rgba(255,255,255,${tw})`;
+      ctx.shadowBlur = s.g ? 8*dpr : 0;
+      ctx.shadowColor = 'rgba(200,215,255,.9)';
+      ctx.beginPath(); ctx.arc(s.x, s.y, s.r/2, 0, 6.283); ctx.fill();
+    }
+    if (!still) requestAnimationFrame(draw);
+  }
+  size(); addEventListener('resize', () => { size(); if (still) draw(0); });
+  still ? draw(0) : requestAnimationFrame(draw);
+})();
+
+// Accordion rows
+document.querySelectorAll('.project:not(.live)').forEach(p => {
+  const row = p.querySelector('.row');
+  row.addEventListener('click', () => { const o = p.classList.toggle('open'); row.setAttribute('aria-expanded', o); });
+  p.querySelectorAll('.tabs button').forEach(tab => tab.addEventListener('click', () => {
+    p.querySelectorAll('.tabs button').forEach(b => b.setAttribute('aria-selected', b === tab));
+    p.querySelectorAll('[data-pane]').forEach(x => x.hidden = x.dataset.pane !== tab.dataset.v);
+  }));
+});
+
+// Booking picker: builds a meeting request and opens a pre-filled email
+(() => {
+  const dayBox = document.getElementById('dayChips');
+  const fmtDay = new Intl.DateTimeFormat('en-GB', {weekday:'short'});
+  const fmtDate = new Intl.DateTimeFormat('en-GB', {day:'numeric', month:'short'});
+  const fmtLong = new Intl.DateTimeFormat('en-GB', {weekday:'long', day:'numeric', month:'long'});
+  const d = new Date(); d.setDate(d.getDate() + 1);
+  for (let added = 0; added < 5; d.setDate(d.getDate() + 1)) {
+    if (d.getDay() === 0 || d.getDay() === 6) continue;
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'chip'; b.dataset.val = fmtLong.format(d);
+    b.innerHTML = `${fmtDay.format(d)}<small>${fmtDate.format(d)}</small>`;
+    dayBox.appendChild(b); added++;
+  }
+
+  const pick = {}, groups = ['type','via','day','time'];
+  const summary = document.getElementById('bookSummary'), btn = document.getElementById('bookBtn'), meter = document.getElementById('bookMeter');
+  const nudges = ['Pick an option in each step to build your meeting.', 'Nice start, three more taps.', 'Halfway there.', 'One last pick.'];
+
+  document.querySelectorAll('.booker .chips').forEach(box => {
+    box.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', 'false'));
+    box.addEventListener('click', e => {
+      const c = e.target.closest('.chip'); if (!c) return;
+      box.querySelectorAll('.chip').forEach(x => x.setAttribute('aria-pressed', x === c));
+      pick[box.dataset.group] = c.dataset.val;
+      if (box.dataset.group === 'type') pick.len = c.dataset.len;
+      box.closest('.step').classList.add('done');
+      update();
+    });
+  });
+
+  function update(){
+    const n = groups.filter(g => pick[g]).length;
+    meter.style.width = (n / 4 * 100) + '%';
+    if (n < 4) { summary.textContent = nudges[n]; btn.setAttribute('aria-disabled', 'true'); btn.classList.remove('ready'); return; }
+    summary.innerHTML = `<strong>${pick.type}</strong> (${pick.len}) via <strong>${pick.via}</strong> on <strong>${pick.day}</strong> at <strong>${pick.time}</strong>. Looks great!`;
+    const to = document.getElementById('mailAddr').textContent.trim();
+    const subject = `Meeting request: ${pick.type} on ${pick.day}, ${pick.time}`;
+    const body = `Hi Adrián,\n\nI'd like to book a ${pick.type.toLowerCase()} (${pick.len}) via ${pick.via} on ${pick.day} at ${pick.time} (Barcelona time).\n\nA bit about my project:\n\n\nMy name:\n`;
+    btn.href = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    btn.setAttribute('aria-disabled', 'false'); btn.classList.add('ready');
+  }
+})();
+
+// Copy email
+document.getElementById('copyMail').addEventListener('click', e => {
+  const b = e.currentTarget, el = document.getElementById('mailAddr');
+  navigator.clipboard.writeText(el.textContent).then(() => { b.textContent = 'copied'; setTimeout(() => b.textContent = 'copy', 1500); })
+    .catch(() => { const s = getSelection(), rg = document.createRange(); rg.selectNodeContents(el); s.removeAllRanges(); s.addRange(rg); });
+});
+</script>
+</body>
+</html>
