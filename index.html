@@ -42,7 +42,35 @@ header .links{justify-content:center}
 section{margin-top:120px}
 .label{font:12px var(--f-mono);color:var(--faint);letter-spacing:.04em;margin-bottom:22px}
 
-/* project rows */
+/* project cards */
+.label{display:flex;justify-content:space-between;gap:12px}
+.label .count{color:var(--faint)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:14px;background:var(--panel);overflow:hidden;color:var(--fg);transition:border-color .25s,transform .25s,box-shadow .25s}
+.card:hover{color:var(--fg);border-color:#34343B;transform:translateY(-3px);box-shadow:0 18px 40px -18px rgba(0,0,0,.9),0 0 0 1px rgba(159,180,255,.06)}
+.card:focus-visible{outline-offset:3px;border-radius:14px}
+.shot{position:relative;aspect-ratio:16/9;overflow:hidden;border-bottom:1px solid var(--line);background:#111114}
+.shot img{display:block;width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.card:hover .shot img{transform:scale(1.03)}
+.shot::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 1px rgba(255,255,255,.04);pointer-events:none}
+.card-body{display:flex;flex-direction:column;gap:10px;padding:18px 20px 20px;flex:1}
+.card-top{display:flex;align-items:center;gap:10px}
+.card h3{font-size:18px;font-weight:500;letter-spacing:-.01em}
+.card:hover h3{color:var(--accent)}
+.pill{font:11px var(--f-mono);color:#7EE0A6;border:1px solid #2A4A38;border-radius:999px;padding:2px 8px;display:inline-flex;align-items:center;gap:6px}
+.pill::before{content:"";width:5px;height:5px;border-radius:50%;background:#7EE0A6;box-shadow:0 0 8px #7EE0A6}
+.kind{margin-left:auto;font:12px var(--f-mono);color:var(--faint)}
+.card p{color:var(--muted);font-size:15px;line-height:1.55}
+.card-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;padding-top:6px}
+.tags{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.tags li{font:11px var(--f-mono);color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:3px 8px}
+.visit{font:12px var(--f-mono);color:var(--faint);white-space:nowrap}
+.visit span{display:inline-block;transition:transform .25s}
+.card:hover .visit{color:var(--fg)}
+.card:hover .visit span{transform:translate(2px,-2px)}
+@media (max-width:720px){.grid{grid-template-columns:1fr}}
+
+/* accordion rows */
 .project{border-top:1px solid var(--line)}
 .project:last-child{border-bottom:1px solid var(--line)}
 .row{all:unset;box-sizing:border-box;display:grid;grid-template-columns:1fr auto;gap:4px 16px;width:100%;padding:20px 0;cursor:pointer}
@@ -156,21 +184,40 @@ footer{margin-top:120px;font:12px var(--f-mono);color:var(--faint);display:flex;
   </header>
 
   <section id="work">
-    <p class="label">selected work · tap to open</p>
+    <p class="label"><span>selected work</span><span class="count">02</span></p>
 
-    <article class="project live">
-      <a class="row" href="https://lahn.es" target="_blank" rel="noopener">
-        <h3>lahn.es</h3><span class="meta">visit site <span class="arrow">↗</span></span>
-        <p>A real website I designed and built from scratch, live in production.</p>
-      </a>
-    </article>
+    <!-- To add a project: copy one <a class="card"> block, change the link, image (16:9, in assets/projects/), text and tags, and update the count above. -->
+    <div class="grid">
 
-    <article class="project live">
-      <a class="row" href="https://summer-resonance-89a0.adrianmunozaguilera88.workers.dev/" target="_blank" rel="noopener">
-        <h3>Dental clinic prototype</h3><span class="meta">view demo <span class="arrow">↗</span></span>
-        <p>A Spanish dental clinic website with real online booking through Calendly and a Barcelona location map. Adapted from an open-source React template.</p>
+      <a class="card" href="https://lahn.es" target="_blank" rel="noopener">
+        <div class="shot"><img src="assets/projects/lahn.jpg" alt="lahn.es home page: author website for Pablo Muñoz Morcillo" width="1440" height="810" loading="lazy"></div>
+        <div class="card-body">
+          <div class="card-top"><h3>lahn.es</h3><span class="pill">live</span><span class="kind">author site</span></div>
+          <p>A real website I designed and built from scratch for a fantasy writer, live in production.</p>
+          <div class="card-foot">
+            <ul class="tags"><li>Design</li><li>Front-end</li><li>Netlify</li></ul>
+            <span class="visit">visit <span>↗</span></span>
+          </div>
+        </div>
       </a>
-    </article>
+
+      <a class="card" href="https://adrian-dentista-prototipo.adrianmunozaguilera88.workers.dev/" target="_blank" rel="noopener">
+        <div class="shot"><img src="assets/projects/dentista.jpg" alt="Dental clinic prototype home page in Spanish" width="1440" height="810" loading="lazy"></div>
+        <div class="card-body">
+          <div class="card-top"><h3>Dental clinic</h3><span class="pill">live</span><span class="kind">prototype</span></div>
+          <p>A Spanish dental clinic site with real online booking through Calendly and a Barcelona map. Adapted from an open-source React template.</p>
+          <div class="card-foot">
+            <ul class="tags"><li>React</li><li>Calendly</li><li>Cloudflare</li></ul>
+            <span class="visit">demo <span>↗</span></span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <section id="about">
+    <p class="label">about · tap to open</p>
 
     <article class="project open">
       <button class="row" type="button" aria-expanded="true">
