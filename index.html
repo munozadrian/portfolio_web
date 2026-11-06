@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Adrián Muñoz Portfolio</title>
+<title>Adrián Muñoz · Portafolio</title>
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -84,7 +84,7 @@ section{margin-top:120px}
 .row:hover h3{color:var(--accent)}
 .row .plus{display:inline-block;transition:transform .25s}
 .project.open .plus{transform:rotate(45deg)}
-.live .row h3::after{content:"live";font:11px var(--f-mono);color:#7EE0A6;border:1px solid #2A4A38;border-radius:999px;padding:2px 8px;margin-left:12px;vertical-align:3px}
+.live .row h3::after{content:"en línea";font:11px var(--f-mono);color:#7EE0A6;border:1px solid #2A4A38;border-radius:999px;padding:2px 8px;margin-left:12px;vertical-align:3px}
 .live .row .arrow{display:inline-block;transition:transform .25s}
 .live .row:hover .arrow{transform:translate(2px,-2px)}
 .body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease}
@@ -178,38 +178,38 @@ footer{margin-top:120px;font:12px var(--f-mono);color:var(--faint);display:flex;
 
 <main>
   <header>
-    <div class="status"><i></i>open for freelance work</div>
+    <div class="status"><i></i>disponible para proyectos freelance</div>
     <h1>Adrián Muñoz</h1>
-    <p class="lede">I design and build fast, clean websites, and I show the code behind every one.</p>
-    <p class="role">front-end developer</p>
+    <p class="lede">Diseño y desarrollo webs rápidas y limpias, y enseño el código que hay detrás de cada una.</p>
+    <p class="role">desarrollador front-end</p>
     <div class="rule"></div>
-    <div class="links"><a href="#work">work</a><span>·</span><a href="#stack">stack</a><span>·</span><a href="#contact">mail</a></div>
+    <div class="links"><a href="#work">trabajos</a><span>·</span><a href="#stack">herramientas</a><span>·</span><a href="#contact">contacto</a></div>
     <p class="domain">barcelona</p>
   </header>
 
   <section id="work">
-    <p class="label"><span>selected work</span><span class="count">02</span></p>
+    <p class="label"><span>trabajos destacados</span><span class="count">02</span></p>
 
-    <!-- To add a project: copy one <a class="card"> block, change the link, image (16:9, in assets/projects/), text and tags, and update the count above. -->
+    <!-- Para añadir un proyecto: copia un bloque <a class="card">, cambia el enlace, la imagen (16:9, en assets/projects/), el texto y las etiquetas, y actualiza el número de arriba. -->
     <div class="grid">
 
       <a class="card" href="https://lahn.es" target="_blank" rel="noopener">
-        <div class="shot"><img src="assets/projects/lahn.jpg" alt="lahn.es home page: author website for Pablo Muñoz Morcillo" width="1440" height="810" loading="lazy"></div>
+        <div class="shot"><img src="assets/projects/lahn.jpg" alt="Página de inicio de lahn.es: web de autor de Pablo Muñoz Morcillo" width="1440" height="810" loading="lazy"></div>
         <div class="card-body">
-          <div class="card-top"><h3>lahn.es</h3><span class="pill">live</span><span class="kind">author site</span></div>
-          <p>A real website I designed and built from scratch for a fantasy writer, live in production.</p>
+          <div class="card-top"><h3>lahn.es</h3><span class="pill">en línea</span><span class="kind">web de autor</span></div>
+          <p>Una web real que diseñé y desarrollé desde cero para un escritor de fantasía, publicada y en funcionamiento.</p>
           <div class="card-foot">
-            <ul class="tags"><li>Design</li><li>Front-end</li><li>Netlify</li></ul>
-            <span class="visit">visit <span>↗</span></span>
+            <ul class="tags"><li>Diseño</li><li>Front-end</li><li>Netlify</li></ul>
+            <span class="visit">visitar <span>↗</span></span>
           </div>
         </div>
       </a>
 
       <a class="card" href="https://adrian-dentista-prototipo.adrianmunozaguilera88.workers.dev/" target="_blank" rel="noopener">
-        <div class="shot"><img src="assets/projects/dentista.jpg" alt="Dental clinic prototype home page in Spanish" width="1440" height="810" loading="lazy"></div>
+        <div class="shot"><img src="assets/projects/dentista.jpg" alt="Página de inicio del prototipo de clínica dental" width="1440" height="810" loading="lazy"></div>
         <div class="card-body">
-          <div class="card-top"><h3>Dental clinic</h3><span class="pill">live</span><span class="kind">prototype</span></div>
-          <p>A Spanish dental clinic site with real online booking through Calendly and a Barcelona map. Adapted from an open-source React template.</p>
+          <div class="card-top"><h3>Clínica dental</h3><span class="pill">en línea</span><span class="kind">prototipo</span></div>
+          <p>Web para una clínica dental con reserva de citas real a través de Calendly y un mapa de Barcelona. Adaptada de una plantilla de React de código abierto.</p>
           <div class="card-foot">
             <ul class="tags"><li>React</li><li>Calendly</li><li>Cloudflare</li></ul>
             <span class="visit">demo <span>↗</span></span>
@@ -221,33 +221,33 @@ footer{margin-top:120px;font:12px var(--f-mono);color:var(--faint);display:flex;
   </section>
 
   <section id="about">
-    <p class="label">about · tap to open</p>
+    <p class="label">sobre mí · toca para abrir</p>
 
     <article class="project open">
       <button class="row" type="button" aria-expanded="true">
-        <h3>Skills</h3><span class="meta">front-end · back end <span class="plus">+</span></span>
-        <p>Everything a front end needs, from layout to launch, plus the back end know how to handle the server side when a project calls for it.</p>
+        <h3>Habilidades</h3><span class="meta">front-end · back-end <span class="plus">+</span></span>
+        <p>Todo lo que necesita un front-end, desde la maquetación hasta el lanzamiento, y los conocimientos de back-end para encargarme del servidor cuando el proyecto lo pide.</p>
       </button>
       <div class="body"><div>
         <div class="panel skills">
           <div>
-            <h4>front-end <span>· core</span></h4>
+            <h4>front-end <span>· base</span></h4>
             <ul>
-              <li>Semantic HTML &amp; modern CSS</li>
+              <li>HTML semántico y CSS moderno</li>
               <li>JavaScript (ES6+)</li>
-              <li>Responsive, mobile-first layouts</li>
-              <li>Accessibility &amp; performance</li>
-              <li>UI design in Figma</li>
-              <li>SEO basics &amp; deployment</li>
+              <li>Diseños adaptables, pensados primero para móvil</li>
+              <li>Accesibilidad y rendimiento</li>
+              <li>Diseño de interfaces en Figma</li>
+              <li>SEO básico y despliegue</li>
             </ul>
           </div>
           <div>
-            <h4>back end <span>· when needed</span></h4>
+            <h4>back-end <span>· cuando hace falta</span></h4>
             <ul>
-              <li>APIs: building &amp; connecting</li>
-              <li>Databases &amp; data storage</li>
-              <li>Forms, auth &amp; user accounts</li>
-              <li>Servers, hosting &amp; domains</li>
+              <li>APIs: crearlas y conectarlas</li>
+              <li>Bases de datos y almacenamiento</li>
+              <li>Formularios, autenticación y cuentas de usuario</li>
+              <li>Servidores, hosting y dominios</li>
             </ul>
           </div>
         </div>
@@ -256,21 +256,21 @@ footer{margin-top:120px;font:12px var(--f-mono);color:var(--faint);display:flex;
 
     <article class="project">
       <button class="row" type="button" aria-expanded="false">
-        <h3>Education</h3><span class="meta">ai · data <span class="plus">+</span></span>
-        <p>Studying Artificial Intelligence and Data Analysis at La Salle Campus Barcelona, so the sites I build are ready for what comes next.</p>
+        <h3>Formación</h3><span class="meta">ia · datos <span class="plus">+</span></span>
+        <p>Estudio Inteligencia Artificial y Análisis de Datos en La Salle Campus Barcelona, para que las webs que hago estén preparadas para lo que viene.</p>
       </button>
       <div class="body"><div>
         <div class="panel edu">
           <div class="edu-main">
-            <p class="edu-kicker">currently studying</p>
-            <h4>Artificial Intelligence<br>&amp; Data Analysis</h4>
+            <p class="edu-kicker">estudiando ahora</p>
+            <h4>Inteligencia Artificial<br>y Análisis de Datos</h4>
             <p class="edu-school">La Salle Campus Barcelona</p>
-            <p class="edu-pitch">Design and code on one side, data and AI on the other. I'm building the skills to make websites that don't just look good, but think, learn and measure what works.</p>
+            <p class="edu-pitch">Diseño y código por un lado, datos e IA por el otro. Estoy aprendiendo a crear webs que no solo se vean bien, sino que piensen, aprendan y midan lo que funciona.</p>
           </div>
           <div class="edu-side">
-            <div class="edu-grad"><span>expected graduation</span><b>2028</b></div>
+            <div class="edu-grad"><span>graduación prevista</span><b>2028</b></div>
             <ul class="edu-tags">
-              <li>Machine learning</li><li>Python</li><li>Data visualisation</li><li>Statistics</li><li>Databases</li>
+              <li>Machine learning</li><li>Python</li><li>Visualización de datos</li><li>Estadística</li><li>Bases de datos</li>
             </ul>
           </div>
         </div>
@@ -279,33 +279,33 @@ footer{margin-top:120px;font:12px var(--f-mono);color:var(--faint);display:flex;
 
     <article class="project book">
       <button class="row" type="button" aria-expanded="false">
-        <h3>Book a meeting</h3><span class="meta">free · no commitment <span class="plus">+</span></span>
-        <p>Got an idea for a website? Pick a time that suits you and let's talk it through. It takes 20 seconds.</p>
+        <h3>Reserva una reunión</h3><span class="meta">gratis · sin compromiso <span class="plus">+</span></span>
+        <p>¿Tienes una idea para una web? Elige el momento que te venga bien y lo hablamos. Te lleva 20 segundos.</p>
       </button>
       <div class="body"><div>
         <div class="panel booker">
           <div class="step">
-            <p class="step-label"><b>1</b> what do you need?</p>
+            <p class="step-label"><b>1</b> ¿qué necesitas?</p>
             <div class="chips" data-group="type">
-              <button type="button" class="chip" data-val="Quick intro" data-len="15 min">👋 Quick intro <small>15 min</small></button>
-              <button type="button" class="chip" data-val="Project chat" data-len="30 min">💡 Project chat <small>30 min</small></button>
-              <button type="button" class="chip" data-val="Website review" data-len="30 min">🔍 Website review <small>30 min</small></button>
+              <button type="button" class="chip" data-val="Presentación rápida" data-len="15 min">👋 Presentación rápida <small>15 min</small></button>
+              <button type="button" class="chip" data-val="Charla sobre un proyecto" data-len="30 min">💡 Charla sobre un proyecto <small>30 min</small></button>
+              <button type="button" class="chip" data-val="Revisión de una web" data-len="30 min">🔍 Revisión de una web <small>30 min</small></button>
             </div>
           </div>
           <div class="step">
-            <p class="step-label"><b>2</b> how should we meet?</p>
+            <p class="step-label"><b>2</b> ¿cómo quedamos?</p>
             <div class="chips" data-group="via">
-              <button type="button" class="chip" data-val="Google Meet">🎥 Google Meet</button>
-              <button type="button" class="chip" data-val="Phone call">📞 Phone call</button>
-              <button type="button" class="chip" data-val="Coffee in Barcelona">☕ Coffee in Barcelona</button>
+              <button type="button" class="chip" data-val="por Google Meet">🎥 Google Meet</button>
+              <button type="button" class="chip" data-val="por teléfono">📞 Llamada</button>
+              <button type="button" class="chip" data-val="tomando un café en Barcelona">☕ Un café en Barcelona</button>
             </div>
           </div>
           <div class="step">
-            <p class="step-label"><b>3</b> pick a day</p>
+            <p class="step-label"><b>3</b> elige un día</p>
             <div class="chips days" data-group="day" id="dayChips"></div>
           </div>
           <div class="step">
-            <p class="step-label"><b>4</b> pick a time <span class="tz">(Barcelona time)</span></p>
+            <p class="step-label"><b>4</b> elige una hora <span class="tz">(hora de Barcelona)</span></p>
             <div class="chips" data-group="time">
               <button type="button" class="chip" data-val="10:00">10:00</button>
               <button type="button" class="chip" data-val="12:00">12:00</button>
@@ -315,8 +315,8 @@ footer{margin-top:120px;font:12px var(--f-mono);color:var(--faint);display:flex;
           </div>
           <div class="confirm">
             <div class="meter" aria-hidden="true"><i id="bookMeter"></i></div>
-            <p id="bookSummary" aria-live="polite">Pick an option in each step to build your meeting.</p>
-            <a id="bookBtn" class="book-btn" aria-disabled="true" href="#">Request this meeting <span>→</span></a>
+            <p id="bookSummary" aria-live="polite">Elige una opción en cada paso para preparar tu reunión.</p>
+            <a id="bookBtn" class="book-btn" aria-disabled="true" href="#">Solicitar esta reunión <span>→</span></a>
           </div>
         </div>
       </div></div>
@@ -324,21 +324,21 @@ footer{margin-top:120px;font:12px var(--f-mono);color:var(--faint);display:flex;
   </section>
 
   <section id="stack">
-    <p class="label">stack</p>
+    <p class="label">herramientas</p>
     <div class="stack">
-      <div><h3>build</h3><ul><li>HTML &amp; CSS</li><li>JavaScript</li><li>Responsive layout</li><li>Accessibility</li></ul></div>
-      <div><h3>design</h3><ul><li>Figma</li><li>Type &amp; color</li><li>Wireframes</li><li>UI systems</li></ul></div>
-      <div><h3>ship</h3><ul><li>Git &amp; GitHub</li><li>Netlify · Vercel</li><li>Performance</li><li>Basic SEO</li></ul></div>
+      <div><h3>desarrollo</h3><ul><li>HTML y CSS</li><li>JavaScript</li><li>Diseño adaptable</li><li>Accesibilidad</li></ul></div>
+      <div><h3>diseño</h3><ul><li>Figma</li><li>Tipografía y color</li><li>Wireframes</li><li>Sistemas de interfaz</li></ul></div>
+      <div><h3>publicación</h3><ul><li>Git y GitHub</li><li>Netlify · Vercel</li><li>Rendimiento</li><li>SEO básico</li></ul></div>
     </div>
   </section>
 
   <section id="contact" class="contact">
-    <p class="label">contact</p>
-    <p>Need a website for your business or project? Send a short note and I'll reply within two working days.</p>
-    <div class="mail"><code id="mailAddr">adrianmunozaguilera88@gmail.com</code><button id="copyMail" type="button">copy</button></div>
+    <p class="label">contacto</p>
+    <p>¿Necesitas una web para tu negocio o proyecto? Escríbeme unas líneas y te respondo en un máximo de dos días laborables.</p>
+    <div class="mail"><code id="mailAddr">adrianmunozaguilera88@gmail.com</code><button id="copyMail" type="button">copiar</button></div>
   </section>
 
-  <footer><span>© 2026 adrián muñoz aguilera</span><span>hand-coded · no templates</span></footer>
+  <footer><span>© 2026 adrián muñoz aguilera</span><span>hecho a mano · sin plantillas</span></footer>
 </main>
 
 <script>
@@ -385,9 +385,9 @@ document.querySelectorAll('.project:not(.live)').forEach(p => {
 // Booking picker: builds a meeting request and opens a pre-filled email
 (() => {
   const dayBox = document.getElementById('dayChips');
-  const fmtDay = new Intl.DateTimeFormat('en-GB', {weekday:'short'});
-  const fmtDate = new Intl.DateTimeFormat('en-GB', {day:'numeric', month:'short'});
-  const fmtLong = new Intl.DateTimeFormat('en-GB', {weekday:'long', day:'numeric', month:'long'});
+  const fmtDay = new Intl.DateTimeFormat('es-ES', {weekday:'short'});
+  const fmtDate = new Intl.DateTimeFormat('es-ES', {day:'numeric', month:'short'});
+  const fmtLong = new Intl.DateTimeFormat('es-ES', {weekday:'long', day:'numeric', month:'long'});
   const d = new Date(); d.setDate(d.getDate() + 1);
   for (let added = 0; added < 5; d.setDate(d.getDate() + 1)) {
     if (d.getDay() === 0 || d.getDay() === 6) continue;
@@ -399,7 +399,7 @@ document.querySelectorAll('.project:not(.live)').forEach(p => {
 
   const pick = {}, groups = ['type','via','day','time'];
   const summary = document.getElementById('bookSummary'), btn = document.getElementById('bookBtn'), meter = document.getElementById('bookMeter');
-  const nudges = ['Pick an option in each step to build your meeting.', 'Nice start, three more taps.', 'Halfway there.', 'One last pick.'];
+  const nudges = ['Elige una opción en cada paso para preparar tu reunión.', 'Buen comienzo, quedan tres pasos.', 'Ya vas por la mitad.', 'Solo falta un paso.'];
 
   document.querySelectorAll('.booker .chips').forEach(box => {
     box.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', 'false'));
@@ -417,10 +417,10 @@ document.querySelectorAll('.project:not(.live)').forEach(p => {
     const n = groups.filter(g => pick[g]).length;
     meter.style.width = (n / 4 * 100) + '%';
     if (n < 4) { summary.textContent = nudges[n]; btn.setAttribute('aria-disabled', 'true'); btn.classList.remove('ready'); return; }
-    summary.innerHTML = `<strong>${pick.type}</strong> (${pick.len}) via <strong>${pick.via}</strong> on <strong>${pick.day}</strong> at <strong>${pick.time}</strong>. Looks great!`;
+    summary.innerHTML = `<strong>${pick.type}</strong> (${pick.len}) <strong>${pick.via}</strong> el <strong>${pick.day}</strong> a las <strong>${pick.time}</strong>. ¡Perfecto!`;
     const to = document.getElementById('mailAddr').textContent.trim();
-    const subject = `Meeting request: ${pick.type} on ${pick.day}, ${pick.time}`;
-    const body = `Hi Adrián,\n\nI'd like to book a ${pick.type.toLowerCase()} (${pick.len}) via ${pick.via} on ${pick.day} at ${pick.time} (Barcelona time).\n\nA bit about my project:\n\n\nMy name:\n`;
+    const subject = `Solicitud de reunión: ${pick.type}, ${pick.day} a las ${pick.time}`;
+    const body = `Hola Adrián:\n\nMe gustaría reservar una ${pick.type.toLowerCase()} (${pick.len}) ${pick.via} el ${pick.day} a las ${pick.time} (hora de Barcelona).\n\nUn poco sobre mi proyecto:\n\n\nMi nombre:\n`;
     btn.href = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     btn.setAttribute('aria-disabled', 'false'); btn.classList.add('ready');
   }
@@ -429,7 +429,7 @@ document.querySelectorAll('.project:not(.live)').forEach(p => {
 // Copy email
 document.getElementById('copyMail').addEventListener('click', e => {
   const b = e.currentTarget, el = document.getElementById('mailAddr');
-  navigator.clipboard.writeText(el.textContent).then(() => { b.textContent = 'copied'; setTimeout(() => b.textContent = 'copy', 1500); })
+  navigator.clipboard.writeText(el.textContent).then(() => { b.textContent = 'copiado'; setTimeout(() => b.textContent = 'copiar', 1500); })
     .catch(() => { const s = getSelection(), rg = document.createRange(); rg.selectNodeContents(el); s.removeAllRanges(); s.addRange(rg); });
 });
 </script>
