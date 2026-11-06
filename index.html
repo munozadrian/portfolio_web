@@ -41,6 +41,17 @@ header{text-align:center}
 header .lede{margin-left:auto;margin-right:auto}
 header .rule{margin-left:auto;margin-right:auto}
 header .links{justify-content:center}
+/* typewriter: the invisible ghost copy reserves the final size so nothing jumps while typing */
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.tw{display:grid}
+.tw > span{grid-area:1/1}
+.tw-ghost{visibility:hidden}
+.role{min-height:1.65em}
+.caret{display:inline-block;width:0;color:var(--accent);font-weight:400;animation:blink 1s steps(1) infinite}
+.caret::after{content:"|";margin-left:1px}
+.caret.typing{animation:none}
+.caret[hidden]{display:none}
+@keyframes blink{50%{opacity:0}}
 .status i{width:6px;height:6px;border-radius:50%;background:#7EE0A6;box-shadow:0 0 10px #7EE0A6}
 
 section{margin-top:120px}
@@ -180,8 +191,11 @@ footer{margin-top:120px;font:12px var(--f-mono);color:var(--faint);display:flex;
   <header>
     <div class="status"><i></i>disponible para proyectos freelance</div>
     <h1>Adrián Muñoz</h1>
-    <p class="lede">Diseño y desarrollo webs rápidas y limpias, y enseño el código que hay detrás de cada una.</p>
-    <p class="role">desarrollador front-end</p>
+    <p class="lede">
+      <span class="sr-only">Diseño y desarrollo webs rápidas y limpias, y enseño el código que hay detrás de cada una.</span>
+      <span class="tw" aria-hidden="true"><span class="tw-ghost">Diseño y desarrollo webs rápidas y limpias, y enseño el código que hay detrás de cada una.</span><span><span id="ledeText">Diseño y desarrollo webs rápidas y limpias, y enseño el código que hay detrás de cada una.</span><span class="caret" id="ledeCaret" hidden></span></span></span>
+    </p>
+    <p class="role"><span class="sr-only">Desarrollador, analista de datos y diseñador</span><span aria-hidden="true"><span id="roleText">Desarrollador · Analista de datos · Diseñador</span><span class="caret" id="roleCaret" hidden></span></span></p>
     <div class="rule"></div>
     <div class="links"><a href="#work">trabajos</a><span>·</span><a href="#stack">herramientas</a><span>·</span><a href="#contact">contacto</a></div>
     <p class="domain">barcelona</p>
@@ -370,6 +384,46 @@ footer{margin-top:120px;font:12px var(--f-mono);color:var(--faint);display:flex;
   }
   size(); addEventListener('resize', () => { size(); if (still) draw(0); });
   still ? draw(0) : requestAnimationFrame(draw);
+})();
+
+// Typewriter: types the headline once, then rotates the role words forever.
+// Without JS, or with reduced motion on, the full text simply shows as written in the HTML.
+(() => {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const words = ['Desarrollador', 'Analista de datos', 'Diseñador'];
+  const lede = document.getElementById('ledeText'), role = document.getElementById('roleText');
+  const ledeCaret = document.getElementById('ledeCaret'), roleCaret = document.getElementById('roleCaret');
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  const full = lede.textContent;
+  lede.textContent = ''; role.textContent = '';
+
+  async function type(el, caret, text, speed){
+    caret.classList.add('typing');
+    for (const ch of text){
+      el.textContent += ch;
+      await wait(speed * (.6 + Math.random() * .8) + (/[,.]/.test(ch) ? 280 : 0));
+    }
+    caret.classList.remove('typing');
+  }
+  async function erase(el, caret, speed){
+    caret.classList.add('typing');
+    while (el.textContent){ el.textContent = [...el.textContent].slice(0, -1).join(''); await wait(speed); }
+    caret.classList.remove('typing');
+  }
+
+  (async () => {
+    ledeCaret.hidden = false;
+    await wait(600);
+    await type(lede, ledeCaret, full, 32);
+    await wait(800);
+    ledeCaret.hidden = true; roleCaret.hidden = false;
+    for (let i = 0; ; i = (i + 1) % words.length){
+      await type(role, roleCaret, words[i], 75);
+      await wait(1800);
+      await erase(role, roleCaret, 40);
+      await wait(350);
+    }
+  })();
 })();
 
 // Accordion rows
